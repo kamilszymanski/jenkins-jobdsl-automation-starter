@@ -1,0 +1,67 @@
+apply plugin: 'groovy'
+
+sourceCompatibility = '1.8'
+
+sourceSets {
+    gdsl {
+        groovy {
+            srcDirs 'gdsl'
+            compileClasspath = compileGroovy.classpath
+        }
+    }
+    jobs {
+        groovy {
+            srcDirs 'jobs'
+            compileClasspath = compileGroovy.classpath
+        }
+    }
+}
+
+configurations {
+    all {
+        resolutionStrategy {
+            force 'org.netbeans.modules:org-netbeans-insane:RELEASE72'
+        }
+    }
+    jenkinsPlugins {}
+    testImplementation {
+        exclude group: 'xalan'
+    }
+}
+
+apply from: 'repositories.gradle'
+apply from: 'jenkins_plugins.gradle'
+
+def jobDslVersion = '1.76'
+
+dependencies {
+    implementation 'org.codehaus.groovy:groovy-all:2.4.17'
+    implementation "org.jenkins-ci.plugins:job-dsl-core:${jobDslVersion}"
+
+    jobsImplementation sourceSets.main.output
+
+    testImplementation 'cglib:cglib-nodep:3.1'
+    testImplementation 'org.objenesis:objenesis:2.1'
+    testImplementation 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testImplementation 'org.jenkins-ci.main:jenkins-test-harness:2.55'
+    testImplementation 'org.jenkins-ci.main:jenkins-war:2.190.1'
+    testImplementation "org.jenkins-ci.plugins:job-dsl:${jobDslVersion}@jar"
+    testImplementation 'org.jenkins-ci.plugins:structs:1.20@jar'
+}
+
+task resolveJenkinsPlugins(type: Copy) {
+    from configurations.jenkinsPlugins
+    include '*.hpi'
+    include '*.jpi'
+    into new File(sourceSets.test.output.resourcesDir, 'test-dependencies')
+
+    doLast {
+        def baseNames = source.collect { it.name[0..it.name.lastIndexOf('.')-1] }
+        new File(destinationDir, 'index').setText(baseNames.join('\n'), 'UTF-8')
+    }
+}
+
+test {
+    dependsOn tasks.resolveJenkinsPlugins
+    inputs.files sourceSets.jobs.groovy.srcDirs
+}
