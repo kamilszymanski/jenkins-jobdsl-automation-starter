@@ -1,12 +1,12 @@
-# Job DSL Jenkins automation starter 
+# Jenkins Job DSL automation starter
 
-Skeleton for [Job DSL](https://github.com/jenkinsci/job-dsl-plugin) based [Jenkins](https://jenkins.io/) CI/CD automation project.
+Skeleton for [Job DSL](https://github.com/jenkinsci/job-dsl-plugin) based [Jenkins](https://jenkins.io/) CI/CD automation projects.
 
 Allows to quickly bootstrap Gradle project ready to create and test Job DSL scripts.
 
 ## Samples
 
-Starter contains code samples that showcase how to test DSL scripts as well as allow to test updates (e.g. Jenkins, Job DSL plugin).
+Starter contains code samples that showcase how to create and test DSL scripts as well as allow to test updates (e.g. Jenkins, Job DSL plugin).
 
 ## Bootstrap steps
 
@@ -15,6 +15,7 @@ Starter contains code samples that showcase how to test DSL scripts as well as a
 * remove tests from com.twitter.kszdev.jenkins.jobdsl.custom package
 * remove tests from com.twitter.kszdev.jenkins.jobdsl.job package
 * remove test resources
+* remove or update README files
 * rename packages in test sources
 * update list of plugins available in tests
 * update DSL scripts' references in tests
@@ -30,6 +31,10 @@ Starter contains code samples that showcase how to test DSL scripts as well as a
 |   |-- main                - contains custom code used in Job DSL scripts
 |   |-- test                - contains Job DSL scripts' tests
 ```
+
+## Jenkins Pipeline support
+
+Skeleton for [Jenkins Pipeline](https://plugins.jenkins.io/workflow-aggregator) based [Jenkins](https://jenkins.io/) CI/CD automation projects can be found in [jenkins-pipeline-automation-starter](https://github.com/kamilszymanski/jenkins-pipeline-automation-starter).
 
 ## References
 

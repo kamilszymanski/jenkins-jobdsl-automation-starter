@@ -22,8 +22,4 @@ class ExpectedXmlConfigGenerator extends JenkinsDslSpecBase implements WithExpec
         where:
             dslScriptFile << ['samples.groovy']
     }
-
-    private String getExpectedConfigFor(String job) {
-        return new File(expectedConfigsLocation, "${job}.xml").text
-    }
 }

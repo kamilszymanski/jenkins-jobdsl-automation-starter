@@ -43,7 +43,7 @@ dependencies {
     testImplementation 'cglib:cglib-nodep:3.1'
     testImplementation 'org.objenesis:objenesis:2.1'
     testImplementation 'org.spockframework:spock-core:1.0-groovy-2.4'
-    testImplementation 'org.jenkins-ci.main:jenkins-test-harness:2.55'
+    testImplementation 'org.jenkins-ci.main:jenkins-test-harness:2.56'
     testImplementation 'org.jenkins-ci.main:jenkins-war:2.190.1'
     testImplementation "org.jenkins-ci.plugins:job-dsl:${jobDslVersion}@jar"
     testImplementation 'org.jenkins-ci.plugins:structs:1.20@jar'
