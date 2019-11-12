@@ -1,5 +1,6 @@
-import com.twitter.kszdev.jenkins.jobdsl.custom.Timestamper
 import javaposse.jobdsl.dsl.views.jobfilter.Status
+
+import static com.twitter.kszdev.jenkins.jobdsl.custom.Timestamper.addTimestamps
 
 job('sample-job') {
     steps {
@@ -13,7 +14,7 @@ job('sample-job') {
     }
     wrappers {
         colorizeOutput()                                // plugin supported via JobDSL API
-        Timestamper.addTimestamps(delegate)             // custom code on the classpath
+        addTimestamps(delegate)                         // custom code on the classpath
     }
     configure {
         (it / quietPeriod).value = 0                    // directly modify underlying config.xml
