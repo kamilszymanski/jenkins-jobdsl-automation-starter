@@ -19,7 +19,12 @@ class MigrationHelper extends JenkinsDslSpecBase implements WithConfigXmlDiff {
             assertGeneratedConfigMatches(jobName, getGeneratedConfigFor(jobName), getExpectedConfigFor(jobName))
     }
 
-    private static String getExpectedConfigFor(String job) {
-        return this.class.getResource("/${MIGRATION_TARGET_RESOURCES_PATH}/${job}.xml").text
+    private String getExpectedConfigFor(String job) {
+        URL expectedConfigUrl = this.class.getResource("/${MIGRATION_TARGET_RESOURCES_PATH}/${job}.xml")
+        if (expectedConfigUrl == null) {
+            throw new RuntimeException(
+                    "Expected config XML for ${job} job not found in /${MIGRATION_TARGET_RESOURCES_PATH} resource path")
+        }
+        return expectedConfigUrl.text
     }
 }

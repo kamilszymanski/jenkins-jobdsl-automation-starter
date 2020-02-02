@@ -17,8 +17,8 @@ class DslScriptsSyntaxSpec extends JenkinsDslSpecBase {
             dslScript << dslScripts
     }
 
-    private List getDslScripts() {
-        List dslScripts = []
+    private List<File> getDslScripts() {
+        List<File> dslScripts = []
         dslScriptsLocation.eachFileRecurse(FILES) {
             if (it.name.endsWith('.groovy')) {
                 dslScripts << it

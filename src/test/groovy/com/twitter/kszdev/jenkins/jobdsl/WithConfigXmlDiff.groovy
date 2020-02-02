@@ -16,12 +16,12 @@ trait WithConfigXmlDiff {
 
     void assertGeneratedConfigsMatch(Map<String, String> generatedJobs, String expectedConfigsResourcesPath) {
         generatedJobs.each { jobName, jobConfig ->
-            def expectedConfig = this.class.getResource("/${expectedConfigsResourcesPath}/${jobName}.xml")
-            if (expectedConfig == null) {
+            URL expectedConfigUrl = this.class.getResource("/${expectedConfigsResourcesPath}/${jobName}.xml")
+            if (expectedConfigUrl == null) {
                 throw new RuntimeException(
-                        "Expected config XML for ${jobName} job not found in ${expectedConfigsResourcesPath} resource path")
+                        "Expected config XML for ${jobName} job not found in /${expectedConfigsResourcesPath} resource path")
             }
-            assertGeneratedConfigMatches(jobName, jobConfig, expectedConfig.text)
+            assertGeneratedConfigMatches(jobName, jobConfig, expectedConfigUrl.text)
         }
     }
 

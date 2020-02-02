@@ -1,6 +1,5 @@
-import javaposse.jobdsl.dsl.views.jobfilter.Status
-
 import static com.twitter.kszdev.jenkins.jobdsl.custom.Timestamper.addTimestamps
+import static javaposse.jobdsl.dsl.views.jobfilter.Status.FAILED
 
 job('sample-job') {
     steps {
@@ -24,7 +23,7 @@ job('sample-job') {
 listView('sample-view') {
     jobFilters {
         status {                                        // plugin supported via JobDSL API
-            status(Status.FAILED)
+            status(FAILED)
         }
     }
     columns {
